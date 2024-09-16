@@ -32,6 +32,7 @@ export const styles = {
     minHeight: 50,
     borderRadius: '8px',
     background: ' rgba(133, 93, 175, 0.13) ',
+    cursor: 'pointer',
     '@media only screen and (min-width:768px)': {
       ...styles['@media only screen and (min-width: 768px)'],
       minWidth: 160,
@@ -50,6 +51,7 @@ export const styles = {
     ':hover': {
       background: 'rgba(255, 255, 255, 0.10)',
       color: '#FF868D',
+      cursor: 'pointer',
     },
   }),
   menu: baseStyles => ({

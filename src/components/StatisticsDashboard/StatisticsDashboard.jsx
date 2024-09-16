@@ -1,99 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import Select from 'react-select';
-import { StyledSelectMainDiv, styles } from './StatisticsDashboard.styled';
-
+import React, { useState, useEffect } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { fetchTransactionsSummary } from '../../redux/transactions/operations';
+import { StyledSelectMainDiv } from './StatisticsDashboard.styled';
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 const StatisticsDashboard = () => {
   const dispatch = useDispatch();
-  const [selectedMonth, setSelectedMonth] = useState({
-    value: 10,
-    label: 'October',
-  });
-  const [selectedYear, setSelectedYear] = useState({
-    value: 2023,
-    label: '2023',
-  });
 
-  const onMonthChange = month => {
-    setSelectedMonth(month);
-  };
-  const onYearClick = year => {
-    setSelectedYear(year);
-  };
+  //  luna și anul curent
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
-  const optionsYears = [
-    { value: 2021, label: '2024' },
-    { value: 2023, label: '2023' },
-    { value: 2022, label: '2022' },
-    { value: 2021, label: '2021' },
-    { value: 2021, label: '2020' },
-    { value: 2019, label: '2019' },
-    { value: 2018, label: '2018' },
-    { value: 2017, label: '2017' },
-    { value: 2017, label: '2016' },
-    { value: 2017, label: '2015' },
-    { value: 2017, label: '2014' },
-    { value: 2017, label: '2013' },
-    { value: 2017, label: '2012' },
-    { value: 2017, label: '2011' },
-    { value: 2017, label: '2010' },
-    { value: 2017, label: '2009' },
-    { value: 2017, label: '2008' },
-  ];
-  const optionsMonth = [
-    { value: 1, label: 'January' },
-    { value: 2, label: 'February' },
-    { value: 3, label: 'March' },
-    { value: 4, label: 'April' },
-    { value: 5, label: 'May' },
-    { value: 6, label: 'June' },
-    { value: 7, label: 'July' },
-    { value: 8, label: 'August' },
-    { value: 9, label: 'September' },
-    { value: 10, label: 'October' },
-    { value: 11, label: 'November' },
-    { value: 12, label: 'December' },
-  ];
+  const [isMonthDropdownOpen, setIsMonthDropdownOpen] = useState(false);
+  const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const data = {
-      month: selectedMonth.value,
-      year: selectedYear.value,
-    };
-    dispatch(fetchTransactionsSummary(data));
+    dispatch(
+      fetchTransactionsSummary({ month: selectedMonth, year: selectedYear })
+    );
   }, [dispatch, selectedMonth, selectedYear]);
+
+  const handleMonthChange = month => {
+    setSelectedMonth(months.indexOf(month) + 1);
+    setIsMonthDropdownOpen(false);
+  };
+
+  const handleYearChange = year => {
+    setSelectedYear(parseInt(year));
+    setIsYearDropdownOpen(false);
+  };
+
+  const toggleMonthDropdown = () => {
+    setIsMonthDropdownOpen(!isMonthDropdownOpen);
+    setIsYearDropdownOpen(false);
+  };
+
+  const toggleYearDropdown = () => {
+    setIsYearDropdownOpen(!isYearDropdownOpen);
+    setIsMonthDropdownOpen(false);
+  };
+
+  const yearOptions = Array.from(
+    { length: 10 },
+    (_, index) => new Date().getFullYear() - index
+  );
+
   return (
     <StyledSelectMainDiv>
-      <Select
-        styles={styles}
-        value={selectedMonth}
-        onChange={value => onMonthChange(value)}
-        options={optionsMonth}
-        placeholder={selectedMonth.label}
-        theme={theme => ({
-          ...theme,
-          colors: {
-            neutral50: '#fff',
-          },
-        })}
-      />
+      <div>
+        {/* Selectare lună */}
+        <div onClick={toggleMonthDropdown}>
+          {months[selectedMonth - 1]}
+          <IoIosArrowDown />
+        </div>
+        {isMonthDropdownOpen && (
+          <div>
+            {months.map((month, index) => (
+              <div key={index} onClick={() => handleMonthChange(month)}>
+                {month}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div>
-        <Select
-          styles={styles}
-          value={selectedYear}
-          onChange={value => onYearClick(value)}
-          options={optionsYears}
-          placeholder={selectedYear.label}
-          theme={theme => ({
-            ...theme,
-            colors: {
-              neutral50: '#fff',
-            },
-          })}
-        />
+        {/* Selectare an */}
+        <div onClick={toggleYearDropdown}>
+          {selectedYear}
+          <IoIosArrowDown />
+        </div>
+        {isYearDropdownOpen && (
+          <div>
+            {yearOptions.map((year, index) => (
+              <div key={index} onClick={() => handleYearChange(year)}>
+                {year}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </StyledSelectMainDiv>
   );
