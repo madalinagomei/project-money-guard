@@ -1,21 +1,36 @@
 Project Money Guard 🛡️💰
+
 Project Money Guard is a React-based personal finance manager that helps users track their income and expenses efficiently. This project was built as an individual initiative to explore React state management, component-based architecture, and data persistence.
 
 📌 Features
+
 ✅ Add, edit & delete transactions – Manage income and expenses effortlessly
+
 ✅ Real-time balance updates – Get an instant financial overview
+
 ✅ Transaction categories – Organize expenses for better budgeting
+
 ✅ Persistent storage – Data is saved in LocalStorage
+
 ✅ Responsive design – Works on both desktop and mobile devices
 
+
+
 🛠️ Tech Stack
+
 🔹 React.js – Component-based UI development
+
 🔹 CSS (Styled Components) – Styling for a clean UI
+
 🔹 Context API – State management
+
 🔹 LocalStorage – Persistent data storage
+
 🔹 GitHub Pages – Live hosting
 
+
 🚀 Getting Started
+
 Clone the repository:
 bash
 Copy
@@ -32,8 +47,6 @@ bash
 Copy
 Edit
 npm start
-🌐 Live Demo
-Check out the application here: Money Guard Live
 
 📩 Feedback & Contributions
 Any feedback is highly appreciated! Feel free to open an issue or submit a pull request if you’d like to contribute. 🚀
