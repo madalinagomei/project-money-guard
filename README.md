@@ -48,5 +48,15 @@ Copy
 Edit
 npm start
 
+
+
+## 📸 Screenshots
+
+![image](https://github.com/user-attachments/assets/84d55618-78eb-4113-a391-c1bf8effe728)
+
+*Example of the app.* ☀️
+
+
+
 📩 Feedback & Contributions
 Any feedback is highly appreciated! Feel free to open an issue or submit a pull request if you’d like to contribute. 🚀
